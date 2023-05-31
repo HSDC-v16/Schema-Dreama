@@ -41,7 +41,9 @@ function PastProjects(props){
   //3. display the SchemaMaker
   const dataElements = data.map(item => (
     <li key={item._id}
-    onClick = {()=> props.updateState(JSON.parse(item.schemaSchema))}
+    onClick = {()=> {
+      props.updateState(JSON.parse(item.schemaSchema))
+    }}
     > 
         {item.title}
      
@@ -60,13 +62,18 @@ function PastProjects(props){
         
             });
             const result = await response.json();
-            console.log(result);
+            console.log('result in pastprojects', result);
             setData(result);
           } catch (error) {
             console.error('Error fetching data:', error);
           }
         };
+<<<<<<< HEAD
+        console.log('data in pastprojects', data);
+=======
+>>>>>>> dev
         fetchData();
+        
       }, []);
     return ( <>
     <h2>Saved Schemas</h2>
