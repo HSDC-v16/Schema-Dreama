@@ -9,6 +9,8 @@ const SchemaMaker = ({ kvpArr, schemaFunc, currentDocument }) => {
   return (
   <div id="schemaMaker">
     Schema - {title}
+    {console.log('--------------------------------',kvpArr)}
+    {console.log('**************', currentDocument.title)}
     {kvpArr.map((ele, index) => (
       <SchemaRow
         schemaObj={ele}
@@ -17,13 +19,16 @@ const SchemaMaker = ({ kvpArr, schemaFunc, currentDocument }) => {
         updateKvpSchema={schemaFunc.updateKvpSchema}
       />
     ))}
+
     <button onClick={schemaFunc.addRow}>+</button>
+
     <div id="schemaExporters">
       <button onClick={schemaFunc.saveSchema}>SAVE</button>
       <button onClick={schemaFunc.deleteSchema}>DELETE</button>
     </div>
-    <SchemaDisplay kvpArr={kvpArr} />
+    <SchemaDisplay kvpArr={kvpArr} currentDocument={currentDocument}/>
   </div>
+
   )
 };
 

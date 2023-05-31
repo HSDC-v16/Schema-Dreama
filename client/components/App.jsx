@@ -7,7 +7,7 @@ import Login from './Authentication /Login.jsx';
 import SignUp from './Authentication /SignUp.jsx';
 import InputButton from './InputButton.jsx';
 
-function App() {
+function App() { 
   //State for Key-Value Pairs
   const [kvpArr, setKvp] = useState([
     { name: 'GoblinGang', type: 'Number', require: false },
@@ -47,6 +47,9 @@ function App() {
       return { ...prev, title: input };
     });
   };
+
+
+
   schemaFunc.updateKvpSchema = (rowNum, changeObj) => {
     const newState = structuredClone(kvpArr);
     Object.assign(newState[rowNum], changeObj);
@@ -84,7 +87,8 @@ function App() {
     newState.push({ name: '', type: 'string', require: false });
     setKvp(newState);
   };
-
+ 
+  //update the page on server response.... Once we reveivce a succefful response from server the page should reflect he actual state of the saved data
   schemaFunc.saveSchema = () => {
     fetch('/', {
       method: 'POST',
@@ -142,15 +146,14 @@ function App() {
                 <span>
                   <InputButton schemaFunc={schemaFunc} />
                 </span>
-                <div>
-                  {' '}
-                  <PastProjects updateState={setKvp} />{' '}
-                </div>
                 <SchemaMaker
                   kvpArr={kvpArr}
                   schemaFunc={schemaFunc}
                   currentDocument={currentDocument}
                 />
+                <div>
+                  <PastProjects updateState={setKvp} />{' '}
+                </div>
               </>
             ) : (
               <>
