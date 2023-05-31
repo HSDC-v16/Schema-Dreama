@@ -37,6 +37,10 @@ body {
   border-radius: 1.5em;
 }
 
+#editRows {
+  pointer-events: auto;
+}
+
 #schemaExporters {
   margin: 10px;
   background-color: var(--secondary-color);

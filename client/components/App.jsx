@@ -22,7 +22,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   //state for signup
-  const [signedUp, setSignedUp] = useState(false);
+  // const [signedUp, setSignedUp] = useState(false);
 
   //State for Past Projects
 
@@ -87,8 +87,13 @@ function App() {
     newState.push({ name: '', type: 'string', require: false });
     setKvp(newState);
   };
- 
-  //update the page on server response.... Once we reveivce a succefful response from server the page should reflect he actual state of the saved data
+
+  schemaFunc.minusRow = () => {
+    const newState = structuredClone(kvpArr);
+    if (newState.length > 1) newState.pop();
+    setKvp(newState);
+  };
+
   schemaFunc.saveSchema = () => {
     fetch('/', {
       method: 'POST',
@@ -100,6 +105,7 @@ function App() {
         title: currentDocument.title,
         schemaSchema: JSON.stringify(kvpArr),
         _id: currentDocument._id,
+        user: user //hardcoding user objectID
       }),
       mode: 'cors',
     })
@@ -116,10 +122,10 @@ function App() {
     setKvp([{ name: 'Write something', type: 'Number', require: false }]);
   };
 
-  useEffect(() => {
-    console.log(currentDocument, 'useEffect');
-    console.log(kvpArr, 'kvp');
-  }, [currentDocument, kvpArr]);
+  // useEffect(() => {
+  //   console.log(currentDocument, 'useEffect');
+  //   console.log(kvpArr, 'kvp');
+  // }, [currentDocument, kvpArr]);
 
   return (
     <div id="appBox">
@@ -134,9 +140,9 @@ function App() {
                 <div>
                   <img className="menu-bg" src={user.picture}></img>
 
-                  <button className="button" onClick={() => setLoggedIn(false)}>
+                  {/* <button className="button" onClick={() => setLoggedIn(false)}>
                     Log Out
-                  </button>
+                  </button> */}
 
                   <h3>{user.name}</h3>
                 </div>
