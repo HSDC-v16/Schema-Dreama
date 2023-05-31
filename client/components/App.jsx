@@ -7,7 +7,7 @@ import Login from './Authentication /Login.jsx';
 import SignUp from './Authentication /SignUp.jsx';
 import InputButton from './InputButton.jsx';
 
-function App() {
+function App() { 
   //State for Key-Value Pairs
   const [kvpArr, setKvp] = useState([
     { name: 'GoblinGang', type: 'Number', require: false },
@@ -15,7 +15,6 @@ function App() {
   const [currentDocument, setCurrentDocument] = useState({
     title: 'temp',
     schemaSchema: 'temp',
-    _id: 'temp',
   });
 
   //state for login
@@ -25,6 +24,7 @@ function App() {
   // const [signedUp, setSignedUp] = useState(false);
 
   //State for Past Projects
+  const [pastProjects, setPastProjects] = useState([]);
 
   //State for user object
   const [user, setUser] = useState({});
@@ -47,6 +47,9 @@ function App() {
       return { ...prev, title: input };
     });
   };
+
+
+
   schemaFunc.updateKvpSchema = (rowNum, changeObj) => {
     const newState = structuredClone(kvpArr);
     Object.assign(newState[rowNum], changeObj);
@@ -72,7 +75,6 @@ function App() {
           setCurrentDocument({
             title: 'temp',
             schemaSchema: 'temp',
-            _id: 'temp',
           });
           schemaFunc.clearSchema();
         }
@@ -101,6 +103,7 @@ function App() {
       body: JSON.stringify({
         title: currentDocument.title,
         schemaSchema: JSON.stringify(kvpArr),
+
         _id: currentDocument._id,
         //user: 'home',
         //user: user want current logged in user
@@ -109,8 +112,8 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setCurrentDocument(data, 'save');
+        console.log('data in saved schemas', data);
+        setCurrentDocument(data);
         setKvp(JSON.parse(data.schemaSchema));
       })
       .catch((err) => console.log(err));
@@ -150,13 +153,17 @@ function App() {
                 <span>
                   <InputButton schemaFunc={schemaFunc} />
                 </span>
+                <div>
+                  {' '}
+                  <PastProjects updateState={setKvp} setCurrentDocument={setCurrentDocument} />{' '}
+                </div>
+
                 <SchemaMaker
                   kvpArr={kvpArr}
                   schemaFunc={schemaFunc}
                   currentDocument={currentDocument}
                 />
                 <div>
-                  {' '}
                   <PastProjects updateState={setKvp} />{' '}
                 </div>
               </>
