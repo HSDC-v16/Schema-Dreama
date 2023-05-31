@@ -10,12 +10,7 @@ const formSchema = new Schema ({
     //follow up with frontend team to confirm
     title:  {type: String, required: true},
     schemaSchema: {type: String, required: true}
-
-
-
 });
-
-
 
 //create model for the schema collection above
 module.exports = mongoose.model('formSchema', formSchema);

@@ -102,6 +102,7 @@ function App() {
         title: currentDocument.title,
         schemaSchema: JSON.stringify(kvpArr),
         _id: currentDocument._id,
+        user: user //hardcoding user objectID
       }),
       mode: 'cors',
     })

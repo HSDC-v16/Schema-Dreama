@@ -48,7 +48,7 @@ app.use(express.urlencoded())
 //------------------SERVER REQUESTS------------------
 
 //connect to mongoDB
-const MONGO_URI = 'mongodb+srv://testingdb:testingdb@cluster0.gs1nz9c.mongodb.net/';
+const MONGO_URI = 'mongodb+srv://vandanharris:giqKuVnpCVTL8zyz@cluster0.nrfnsj7.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))
     .then((err)=> console.log(err))
