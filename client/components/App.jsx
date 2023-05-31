@@ -7,7 +7,7 @@ import Login from './Authentication /Login.jsx';
 import SignUp from './Authentication /SignUp.jsx';
 import InputButton from './InputButton.jsx';
 
-function App() {
+function App() { 
   //State for Key-Value Pairs
   const [kvpArr, setKvp] = useState([
     { name: 'GoblinGang', type: 'Number', require: false },
@@ -47,6 +47,9 @@ function App() {
       return { ...prev, title: input };
     });
   };
+
+
+
   schemaFunc.updateKvpSchema = (rowNum, changeObj) => {
     const newState = structuredClone(kvpArr);
     Object.assign(newState[rowNum], changeObj);
@@ -155,7 +158,6 @@ function App() {
                   currentDocument={currentDocument}
                 />
                 <div>
-                  {' '}
                   <PastProjects updateState={setKvp} />{' '}
                 </div>
               </>

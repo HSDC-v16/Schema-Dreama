@@ -66,7 +66,6 @@ function PastProjects(props){
             console.error('Error fetching data:', error);
           }
         };
-    
         fetchData();
       }, []);
     return ( <>

@@ -3,6 +3,7 @@ import React from 'react';
 const SchemaRow = ({ schemaObj, rowNum, updateKvpSchema }) => (
   <div className="schemaRow">
     <input
+      placeholder='testingplaceholder'
       value={schemaObj.name}
       onChange={(e) => updateKvpSchema(rowNum, { name: e.target.value })}
     ></input>
@@ -19,6 +20,7 @@ const SchemaRow = ({ schemaObj, rowNum, updateKvpSchema }) => (
         <option value="boolean">Boolean</option>
       </select>
     </div>
+    Require?:
     <input
       type="checkbox"
       checked={schemaObj.require}
