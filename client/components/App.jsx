@@ -7,7 +7,7 @@ import Login from './Authentication /Login.jsx';
 import SignUp from './Authentication /SignUp.jsx';
 import InputButton from './InputButton.jsx';
 
-function App() {
+function App() { 
   //State for Key-Value Pairs
   const [kvpArr, setKvp] = useState([
     { name: 'GoblinGang', type: 'Number', require: false },
@@ -21,7 +21,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   //state for signup
-  const [signedUp, setSignedUp] = useState(false);
+  // const [signedUp, setSignedUp] = useState(false);
 
   //State for Past Projects
   const [pastProjects, setPastProjects] = useState([]);
@@ -47,6 +47,9 @@ function App() {
       return { ...prev, title: input };
     });
   };
+
+
+
   schemaFunc.updateKvpSchema = (rowNum, changeObj) => {
     const newState = structuredClone(kvpArr);
     Object.assign(newState[rowNum], changeObj);
@@ -84,6 +87,12 @@ function App() {
     setKvp(newState);
   };
 
+  schemaFunc.minusRow = () => {
+    const newState = structuredClone(kvpArr);
+    if (newState.length > 1) newState.pop();
+    setKvp(newState);
+  };
+
   schemaFunc.saveSchema = () => {
     fetch('/', {
       method: 'POST',
@@ -94,6 +103,11 @@ function App() {
       body: JSON.stringify({
         title: currentDocument.title,
         schemaSchema: JSON.stringify(kvpArr),
+<<<<<<< HEAD
+=======
+        _id: currentDocument._id,
+        user: user //hardcoding user objectID
+>>>>>>> dev
       }),
       mode: 'cors',
     })
@@ -110,10 +124,10 @@ function App() {
     setKvp([{ name: 'Write something', type: 'Number', require: false }]);
   };
 
-  useEffect(() => {
-    console.log(currentDocument, 'useEffect');
-    console.log(kvpArr, 'kvp');
-  }, [currentDocument, kvpArr]);
+  // useEffect(() => {
+  //   console.log(currentDocument, 'useEffect');
+  //   console.log(kvpArr, 'kvp');
+  // }, [currentDocument, kvpArr]);
 
   return (
     <div id="appBox">
@@ -128,9 +142,9 @@ function App() {
                 <div>
                   <img className="menu-bg" src={user.picture}></img>
 
-                  <button className="button" onClick={() => setLoggedIn(false)}>
+                  {/* <button className="button" onClick={() => setLoggedIn(false)}>
                     Log Out
-                  </button>
+                  </button> */}
 
                   <h3>{user.name}</h3>
                 </div>
@@ -140,15 +154,21 @@ function App() {
                 <span>
                   <InputButton schemaFunc={schemaFunc} />
                 </span>
+<<<<<<< HEAD
                 <div>
                   {' '}
                   <PastProjects updateState={setKvp} setCurrentDocument={setCurrentDocument} />{' '}
                 </div>
+=======
+>>>>>>> dev
                 <SchemaMaker
                   kvpArr={kvpArr}
                   schemaFunc={schemaFunc}
                   currentDocument={currentDocument}
                 />
+                <div>
+                  <PastProjects updateState={setKvp} />{' '}
+                </div>
               </>
             ) : (
               <>

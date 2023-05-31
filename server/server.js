@@ -47,7 +47,7 @@ app.use(express.urlencoded())
 
 //------------------SERVER REQUESTS------------------
 
-//connect to mongoDB
+//connect to mongoDB //use your own link. this is set 0.0.0.0 so anyone can use it but its getting full
 const MONGO_URI = 'mongodb+srv://testingdb:testingdb@cluster0.gs1nz9c.mongodb.net/';
 mongoose.connect(MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))

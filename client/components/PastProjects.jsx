@@ -68,7 +68,10 @@ function PastProjects(props){
             console.error('Error fetching data:', error);
           }
         };
+<<<<<<< HEAD
         console.log('data in pastprojects', data);
+=======
+>>>>>>> dev
         fetchData();
         
       }, []);

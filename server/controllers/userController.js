@@ -30,7 +30,7 @@ userController.verifyLogin = async (req, res, next) => {
             message: error
         })
     }
-}
+} 
 
 
 userController.signUp = async (req, res, next) => {

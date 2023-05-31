@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Form = require("../model/documentModel.js");
+const User = require("../model/userModel.js")
 
 
 
@@ -31,8 +32,8 @@ formController.updateDocument = async (req, res, next) => {
 //POST request to create the schema form
 formController.createDocument = async (req, res, next) => {
   // const {  id, form } = req.body;
-  console.log(req.body)
-  const{  title, schemaSchema } = req.body
+  console.log('in create doc',req.body)
+  const{  title, schemaSchema , user} = req.body
 
   //const newDoc = new Form({title: name})
   // const schemaSchema = "ddd";  
@@ -40,9 +41,11 @@ formController.createDocument = async (req, res, next) => {
     try {
       console.log('in the try')
         const document = await Form.create({title, schemaSchema});
+        const userFound = await User.findOneAndUpdate({ username: user }, { $push: {savedSchema: { title, formId: document._id }}}, {new: true});
         console.log('in the callback')
       res.locals.newDocument = document;
       console.log(res.locals.newDocument, 'res.locals')
+      console.log('userFound',userFound)
     
     next();
   } catch (error) {
@@ -63,10 +66,10 @@ formController.deleteDocument = async (req, res, next) => {
 
   const myQuery = { _id: _id };
   console.log('delete query', myQuery);
-
+  //const myQuery = '647775a71ae512d33651c166' //hardcoding delete of this form objectID
   try {
     // query db and deleteOne document
-    const result = await Form.deleteOne(myQuery);
+    const result = await Form.deleteOne({_id: myQuery});
     res.locals.result = result
 
     next();
