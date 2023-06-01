@@ -19,7 +19,7 @@ const SchemaDisplay = ({ kvpArr, currentDocument }) => {
     schemaArr.push(tempLine);
   }
   schemaArr.push('});');
-  // console.log('schemaArr', schemaArr)
+  console.log('schemaArr', schemaArr)
   const schemaStr = schemaArr.join('\n');
   return (
     <div className='codeDiv'>

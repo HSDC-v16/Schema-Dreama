@@ -181,14 +181,22 @@ function App() {
       type: 'String', 
       require: false, 
      minmax: {
-      string: "min",
+      string: "null",
       value: '0'
     },default:{
-      value: `default`,
+      value: `null`,
       placeholder: '',
     }
-
     }]);
+    let targetName = 1;
+    for (let i = 0; i < savedSchemas.length; i++) {
+      if (savedSchemas[i].title === `schema${targetName}`)
+      targetName = targetName + 1;
+    }
+    setCurrentDocument({
+      ...currentDocument,
+      title: `schema${targetName}`
+    })
   };
 
   schemaFunc.getSavedSchemas = async () => {
@@ -210,17 +218,17 @@ function App() {
     };
   };
 
-  useEffect(() => {
-    let targetName = 1;
-    for (let i = 0; i < savedSchemas.length; i++) {
-      if (savedSchemas[i].title === `schema${targetName}`)
-      targetName = targetName + 1;
-    }
-    setCurrentDocument({
-      ...currentDocument,
-      // title: `schema${targetName}`
-    })
-  }, [savedSchemas]);
+  // useEffect(() => {
+  //   let targetName = 1;
+  //   for (let i = 0; i < savedSchemas.length; i++) {
+  //     if (savedSchemas[i].title === `schema${targetName}`)
+  //     targetName = targetName + 1;
+  //   }
+  //   setCurrentDocument({
+  //     ...currentDocument,
+  //     // title: `schema${targetName}`
+  //   })
+  // }, [savedSchemas]);
 
   return (
     <div id="appBox">
