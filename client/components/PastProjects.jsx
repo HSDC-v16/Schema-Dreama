@@ -11,7 +11,7 @@ function PastProjects(props){
     const url = `/getalldocuments/${props.user}`;
    
       
-  console.log('retrieved data in past projects',props.savedSchemas)
+  //console.log('retrieved data in past projects',props.savedSchemas)
   const styles = {
     color:'blue', 
     display: "flex",
@@ -25,7 +25,7 @@ function PastProjects(props){
   //2. make a fetch request based on the id
   //3. display the SchemaMaker
   const dataElements = props.savedSchemas.map(item => {
-    console.log('item', item);
+    //console.log('item', item);
     return (
     <li key={item._id}
     onClick = {()=> {

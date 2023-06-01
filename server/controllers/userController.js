@@ -6,11 +6,13 @@ const bcrypt = require('bcryptjs');
 
 const userController = {}
 
+
+
 userController.verifyLogin = async (req, res, next) => {
     console.log(req.body, 'in the verifyUserName')
     const { username, password } = req.body
     try {
-        const result = await User.findOne({ username: username })
+        const result = await User.findOne({ username })
         console.log('User result password when logging in:',result.password);
         
         if (!result) {
@@ -21,6 +23,7 @@ userController.verifyLogin = async (req, res, next) => {
                 // console.log('PASSED bcrypt compare');
                 res.locals.verified = true
                 res.locals.userId = result._id
+                res.locals.cookieId = result._id;
                 return next()
             } else {
                 res.locals.verified = false
@@ -38,7 +41,7 @@ userController.verifyLogin = async (req, res, next) => {
 
 
 userController.signUp = async (req, res, next) => {
-    const { username, password } = req. body;
+    const { username, password } = req.body;
     
     console.log('signUp', username, password)
     
@@ -48,8 +51,12 @@ userController.signUp = async (req, res, next) => {
         try {
 
             console.log('sign up before call')
-            const newUser = await User.create({username, password});
+            const newUser = await User.create({
+                username, 
+                password
+            });
             res.locals.user = newUser;
+            res.locals.cookieId = newUser._id;
             console.log('signup in call', res.locals.user.username)
             next()         
         } catch (error) {

@@ -86,7 +86,7 @@ formController.deleteDocument = async (req, res, next) => {
 formController.getAllDocuments = async (req, res, next) => {
   // Deconstruct data from request body
   // Process obtained data
-  console.log('req params for get all documents', req.params)
+  // console.log('req params for get all documents', req.params)
   try {
     // Interact with DB
     const targetUser = await User.findOne({ _id: req.params.id}).populate('savedSchema');

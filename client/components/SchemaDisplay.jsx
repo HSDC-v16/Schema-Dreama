@@ -8,7 +8,7 @@ const SchemaDisplay = ({ kvpArr, currentDocument }) => {
 
 
     const tempLine = 
-      `  ${ele.name}: { type: ${ele.type}, require: ${ele.require ? 'true' : 'false'} ${ele.minmax.string!='null' ? `, ${ele.minmax.string}: ${ele.minmax.value}` : ``} ${ele.default.value!=`null` ? `, ${ele.default.value}: ${ele.default.placeholder}` : ``} },` 
+      `  ${ele.name}: { type: ${ele.type}, require: ${ele.require ? 'true' : 'false'} ${ele.minmax.string!='null' ? `, ${ele.minmax.string}: ${ele.minmax.value}` : `${``.trim()}`} ${ele.default.value!=`null` ? `, ${ele.default.value}: ${ele.default.placeholder}` : `${``.trim()}`} },` 
 
     
      ;
@@ -19,7 +19,7 @@ const SchemaDisplay = ({ kvpArr, currentDocument }) => {
     schemaArr.push(tempLine);
   }
   schemaArr.push('});');
-  console.log('schemaArr', schemaArr)
+  //console.log('schemaArr', schemaArr)
   const schemaStr = schemaArr.join('\n');
   return (
     <div className='codeDiv'>
@@ -27,10 +27,10 @@ const SchemaDisplay = ({ kvpArr, currentDocument }) => {
         <code>{schemaStr}</code>
       </pre>
       <button onClick={() => {
-        console.log('copying text');
+        //console.log('copying text');
         let copyText = document.querySelector('pre');
         // copyText.select();
-        console.log(copyText.innerHTML);
+        //console.log(copyText.innerHTML);
         navigator.clipboard.writeText(copyText.innerText);
       }}>copy!</button>
       <br/>

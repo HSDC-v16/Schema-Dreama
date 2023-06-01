@@ -3,9 +3,9 @@ import SchemaRow from './SchemaRow.jsx';
 import SchemaDisplay from './SchemaDisplay.jsx';
 
 const SchemaMaker = ({ kvpArr, schemaFunc, currentDocument }) => {
-  console.log(currentDocument.title, 'currentDocument');
+  //console.log(currentDocument.title, 'currentDocument');
   const { title } = currentDocument;
-  console.log(title, typeof title);
+  //console.log(title, typeof title);
   return (
     <div id="schemaMaker">
       Schema - {title}

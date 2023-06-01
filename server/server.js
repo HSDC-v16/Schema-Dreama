@@ -21,6 +21,8 @@ app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}...`);
   });
   
+const cookieController = require('./controllers/cookieController');
+const sessionController = require('./controllers/sessionController');
 
 //--------------STANDARD MIDDLEWARE (JSON, FORM PARSER, CORS)----------------//
 
@@ -80,7 +82,7 @@ app.patch('/', formController.updateDocument, (req, res) => {
 
 //GET to return all past documents
 app.get('/getalldocuments/:id', formController.getAllDocuments, (req, res) => {
-    console.log('all documents', res.locals.allDocuments)
+    // console.log('all documents', res.locals.allDocuments)
     return res.status(200).send(res.locals.allDocuments)
 });
 
@@ -91,11 +93,11 @@ app.get('/getalldocuments/:id', formController.getAllDocuments, (req, res) => {
 //     return res.status(200).json(res.locals.retrievedDocument)
 // })
 
-app.post('/login', userController.verifyLogin, (req, res) => {
+app.post('/login', userController.verifyLogin, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
     return res.status(200).json(res.locals)
 })
 
-app.post('/signup', userController.signUp, (req, res) => {
+app.post('/signup', userController.signUp, cookieController.setSSIDCookie, (req, res) => {
 
 
     return res.status(200).json(`${res.locals.user.username}'s profile has been successfully created`)
